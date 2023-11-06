@@ -1,0 +1,54 @@
+Hangman	|
+---------
+
+Grupp: 
+
+Linn Johansson
+Daniel Budai
+Paulius Kamuntavicius
+
+
+
+Gruppkontrakt 
+--------------
+
+- Daglig standup. Varje dag 10:00. 
+  10-15 minuter.
+
+- If sjuk {
+meddela i tid 
+}
+
+
+
+
+Måndag: 18:30  
+Pseudokod, påbörja, skiss. Få till giten.
+
+
+Tisdag: 09-16-17 osv osv. 
+Påbörja html, css utifrån resultat på måndag
+
+
+Onsdag: (göra mest dagen) 
+Parkoda 09:00 - 16:00 vid behov, öka tiden vid behov. 
+
+
+Torsdag: 
+Standup kl 10:00. Eget arbete utöver kl 10:00. 
+
+
+Fredag:   
+Standup kl 10:00. Review på koden, städa upp koden, 
+
+
+Lördag / Söndag 
+Vid behov av möte, gå igenom problem som kan uppstå. 
+Linn / Daniel inte tillgänglig Lördag. Paulius någon gång. 
+
+
+Söndag: ?
+
+
+Måndag: 11/13 
+Sista inlämning 
