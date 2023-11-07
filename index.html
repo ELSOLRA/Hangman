@@ -14,7 +14,7 @@
   <body>
     <main class="game">
       <header class="game__header">
-        <h1>Hangman Game</h1>
+        <h1 class="game__title">Hangman Game</h1>
       </header>
       <svg
         class="hangman-figure"
@@ -74,9 +74,7 @@
       <section id="secret-word" class="secret-word">
         <p>
           Secret Word:
-          <span id="word-placeholder" class="secret-word__placeholder"
-            >_ _ _ _ _</span
-          >
+          <span id="word-placeholder" class="secret-word__placeholder">_ _ _ _ _</span>
         </p>
         <!-- change in js to show letter with right input -->
       </section>
@@ -118,6 +116,9 @@
           </section>
         </section>
       </section>
+      <audio id="correct-sound" src=""></audio>
+      <audio id="incorrect-sound" src=""></audio>
+      <audio id="game-over" src=""></audio>
       <script src="./script/script.js"></script>
     </main>
   </body>
