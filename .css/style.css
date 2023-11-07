@@ -10,18 +10,27 @@ body {
   width: 100%;
   background-color: lightgray;
 }
+.game__title {
+    text-shadow: #ff000085 1px 1px 10px;
+    /* background: linear-gradient(to left, #FF0000, #000000);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -moz-background-clip: text;
+    color: transparent; */
+}
 
 .game {
-  height:100vh ; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1.5rem;
-  gap: 3%;
-  padding: 1rem 0 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.5rem;
+    gap: 3%;
+    margin: auto;
 }
 .game__header {
     text-align: center;
+    margin: auto;
 }
 
 .hangman-box{
@@ -39,18 +48,36 @@ body {
 }
 
 .keyboard {
-    margin: auto;
+    margin: 0 auto auto;
     display: flex;
-    flex-wrap: wrap;
-    max-width: 50%;
-    min-width: 300px;
+    justify-content: center;
+    min-width: 260px;
+    max-width: 65vw;
+    flex-direction: column;
+    gap: 0.8vh;
 }
 
 .keyboard__button {
-        min-width: 2rem;
-        width: 8vw;
-        height: 2rem;
-        border: 3px solid lightgray;
+    min-width: 2rem;
+    font-weight: 900;
+    width: 8vw;
+    height: 4.5vh;
+    background-color: #0000ff24;
+    border-radius: 5% / 10%;
+    border: none;
+    box-shadow: 1px 2px 6px -1px rgba(61,61,89,0.6);
+}
+.keyboard__button:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 2px 3px 0px rgb(61 61 89 / 80%);
+    background-color: #0000ff30;
+    cursor: pointer;
 }
 
 
+@media (max-width: 400px) {
+    .keyboard {
+        max-width: 100%;
+        padding-bottom: 2%;
+    }
+}
