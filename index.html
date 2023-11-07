@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="author" content="Paulius Kamuntavicius, Daniel Budai, Linn Johansson">
+    <link rel="stylesheet" href=".css/style.css">
+    <link rel="icon" type="image/png" href="./assets/img/hangman icon.png">
+    <title>Hangman Game</title>
 </head>
 <body>
-    
+  <h1>Hangman Game</h1>
     <svg
     width="501"
     height="565"
@@ -57,6 +59,23 @@
       fill="black"
     />
   </svg>
+  <section id="guess-info">
+    <p>Guesses Left: <span id="guesses-left">5</span></p>
+  </section>
+  <section id="secret-word">
+    <p>Secret Word: <span id="word-placeholder">_ _ _ _ _</span></p> <!-- change in js to show letter with right input -->
+  </section>
+  <section id="keyboard">
+    <table>
+      <tr>
+        <td id="letter0">A</td>
+        <td id="letter1">B</td>
+        <td id="letter2">C</td>
+        <td id="letter3">D</td>
+      </tr>
+    </table>
+  </section>
+  <audio id="sound" src=""></audio>
 
 </body>
 </html>
