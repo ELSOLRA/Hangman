@@ -40,6 +40,7 @@ body {
     display:none;
     max-width: 100%;
     max-height: 100%;
+    fill: #0000ff24;
 }
 
 .secret-word__placeholder{
@@ -73,6 +74,14 @@ body {
     box-shadow: 0px 2px 3px 0px rgb(61 61 89 / 80%);
     background-color: #0000ff30;
     cursor: pointer;
+}
+
+#ground {
+    fill: rgb(14 157 14);
+    opacity: 0.8;
+}
+#head {
+    fill: brown;
 }
 
 
