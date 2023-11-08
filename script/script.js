@@ -96,9 +96,5 @@ function disableAllButtons() {
 }
 
 
-
-/*randomWord.forEach((letter, index) => {
-  placeHolder.innerHTML = placeHolder.innerHTML + "_";
-
-});*/
+// Win or loose, greeting take this sh out
 
