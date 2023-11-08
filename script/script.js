@@ -4,6 +4,7 @@ let wrongLetter = [];
 let correctLetter = [];
 let wrongGuessingCounter = 6;
 let randomWord = "";
+let placeHolder = document.getElementById("word-placeholder");
 let setRandomWord = function (listOfWords) {
   randomWord = listOfWords[Math.floor(Math.random() * listOfWords.length)];
   randomWord = randomWord.toUpperCase();
@@ -21,14 +22,58 @@ buttons.forEach((button) => {
     }
   });
 });
+console.log(randomWord)
+function updatePlaceholder() {
+  let placeholderText = "";
+  for (let i = 0; i < randomWord.length; i++) {
+    if (correctLetter.includes(randomWord[i])) {
+      placeholderText += randomWord[i];
+    } else {
+      placeholderText += "_";
+    }
+  }
+  placeHolder.innerHTML = placeholderText;
+}
+
+updatePlaceholder();
+
+function updateHangman () {
+  
+  switch (wrongGuessingCounter) {
+  case 5 :
+    document.getElementById("ground").style.display = "block";
+    break;
+  case 4 :
+    document.getElementById("scaffold").style.display = "block";
+    break;
+  case 3 :
+    document.getElementById("head").style.display = "block";
+    break;
+  case 2 :
+    document.getElementById("body").style.display = "block";
+    break;
+  case 1 :
+    document.getElementById("arms").style.display = "block";
+    break;
+  case 0 :
+    document.getElementById("legs").style.display = "block";
+    break;
+  }
+}
+
+
+
 function handlGuess(guess) {
   if (randomWord.includes(guess) && wrongGuessingCounter > 0) {
     console.log(`${guess}`);
     correctLetter.push(guess);
+    updatePlaceholder();
   } else if (!randomWord.includes(guess) && wrongGuessingCounter > 0) {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
+    document.getElementById("guess-left").innerText = wrongGuessingCounter;
+    updateHangman();
     console.log(wrongGuessingCounter);
   } else {
     gameOver = true;
@@ -50,17 +95,10 @@ function disableAllButtons() {
   });
 }
 
-let placeHolder = document.getElementById("word-placeholder");
-/*
-let wordLength = randomWord.length;
-let blanksLetters = []
-for (var i = 0; i < wordLength; i++) { 
-        blanksLetters.push("_");
-    }
-    console.log(blanksLetters);
-    placeHolder.innerText = blanksLetters.join("");
-*/
 
-randomWord.forEach((letter) => {
+
+/*randomWord.forEach((letter, index) => {
   placeHolder.innerHTML = placeHolder.innerHTML + "_";
-});
+
+});*/
+
