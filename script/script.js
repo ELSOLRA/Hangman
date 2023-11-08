@@ -64,22 +64,25 @@ function updateHangman () {
 
 
 function handlGuess(guess) {
-  if (randomWord.includes(guess) && wrongGuessingCounter > 0) {
+  if (randomWord.includes(guess)) {
     console.log(`${guess}`);
     correctLetter.push(guess);
     updatePlaceholder();
-  } else if (!randomWord.includes(guess) && wrongGuessingCounter > 0) {
+  } else {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
     document.getElementById("guess-left").innerText = wrongGuessingCounter;
     updateHangman();
     console.log(wrongGuessingCounter);
-  } else {
-    gameOver = true;
-    disableAllButtons();
+    if (wrongGuessingCounter === 0) {
+      console.log("Game over - Six wrong guesses reached.");
+      gameOver = true;
+      disableAllButtons();
+    }
   }
 }
+
 
 console.log(correctLetter);
 
