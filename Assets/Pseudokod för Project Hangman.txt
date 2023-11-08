@@ -2,12 +2,12 @@ Pseudokod för Project Hangman |
 ------------------------------
 
 
-* En array med 20 ord. 3 - 10 bokstäver för varje ord.  		//hemliga ordet rad 1-2
-* En variabel med randomWord som slumpar ett ord från arrayen. 
+-* En array med 20 ord. 3 - 10 bokstäver för varje ord.  		//hemliga ordet rad 1-2
+-* En variabel med randomWord som slumpar ett ord från arrayen. 
 * En tom array [] bokstäverna som är fel.
-* Antal felgissning, som räknar ner varje gissning du gör. -- 
+-* Antal felgissning, som räknar ner varje gissning du gör. -- 
   För varje felgissning ritar den i SVG:gn.
-* Greeting to user. 
+-* Greeting to user. 
 * User input validera med keypress till funktion.
 * Kontrollera input, vid fel och rätt gissning stäng av knapp.
 * Om gissning är rätt: uppdatera med bokstaven _ fältet.
