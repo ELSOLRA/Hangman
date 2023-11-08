@@ -3,6 +3,7 @@ import { wordList } from './wordsList.js';
 
 
 let wrongLetter = [];
+let correctLetter = [];
 let wrongGuessingCounter= 6;
 let randomWord='';
 let setRandomWord= function (listOfWords) {
@@ -27,6 +28,7 @@ buttons.forEach(button => {
     function handlGuess (guess) {
         if (randomWord.includes(guess) && wrongGuessingCounter > 0 ) {
             console.log(`${guess}`);
+            correctLetter.push(guess);
           } else if (!randomWord.includes(guess) && wrongGuessingCounter > 0){
             console.log(`${guess} - incorrect`);
             wrongLetter.push(guess);
@@ -37,6 +39,9 @@ buttons.forEach(button => {
             disableAllButtons();
             }
     }
+    
+    console.log(correctLetter);
+
     
 document.addEventListener('keydown', event => {
     if(!gameOver) {
@@ -52,10 +57,12 @@ function disableAllButtons() {
 
 let placeHolder = document.getElementById('word-placeholder');
 let wordLength = randomWord.length;
-
-randomWord.forEach(index => {
+let blanksLetters = []
+for (var i = 0; i < wordLength; i++) { 
+        blanksLetters.push("_");
+    }
+    console.log(blanksLetters);
+    placeHolder.innerText = blanksLetters.join("");
+/* randomWord.forEach(index => {
     placeHolder.innerHTML = "_";
-} )
-
-
-
+} )*/
