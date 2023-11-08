@@ -14,25 +14,41 @@ setRandomWord(wordList);
 
 
 let buttons = document.querySelectorAll('.keyboard__button');
+let gameOver = false;
 buttons.forEach(button => {
   button.addEventListener('click', () => {
-    let buttonLetter = button.innerHTML;
-    console.log(`${buttonLetter}`);
-    if (randomWord.includes(buttonLetter)) {
-        console.log(`${buttonLetter}`);
-      } else {
-        console.log(`${buttonLetter} - incorrect`);
-        wrongLetter.push(buttonLetter);
-        wrongGuessingCounter--;
-        console.log(wrongGuessingCounter);
-      }
-    if (wrongGuessingCounter === 0) {
-        console.log('Game over!')
-      }
-  });
-});
+    if(!gameOver) {
+    handlGuess(button.innerHTML.toUpperCase());
+    button.disabled = true;
+    }
+  })
+ 
+})
+    function handlGuess (guess) {
+        if (randomWord.includes(guess) && wrongGuessingCounter > 0 ) {
+            console.log(`${guess}`);
+          } else if (!randomWord.includes(guess) && wrongGuessingCounter > 0){
+            console.log(`${guess} - incorrect`);
+            wrongLetter.push(guess);
+            wrongGuessingCounter--;
+            console.log(wrongGuessingCounter);
+          } else {
+            gameOver = true;
+            disableAllButtons();
+            }
+    }
+    
+document.addEventListener('keydown', event => {
+    if(!gameOver) {
+    handlGuess(event.key.toUpperCase());
+    }
+})
 
-
+function disableAllButtons() {
+    buttons.forEach(button => {
+      button.disabled = true;
+    });
+};
 
 
 

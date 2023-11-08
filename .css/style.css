@@ -84,6 +84,9 @@ body {
     fill: brown;
 }
 
+button:disabled {
+    
+}
 
 @media (max-width: 400px) {
     .keyboard {
