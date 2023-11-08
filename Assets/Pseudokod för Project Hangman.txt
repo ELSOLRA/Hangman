@@ -9,7 +9,7 @@ Pseudokod för Project Hangman |
   För varje felgissning ritar den i SVG:gn.
 -* Greeting to user. 
 * User input validera med keypress till funktion.
-* Kontrollera input, vid fel och rätt gissning stäng av knapp.
+-* Kontrollera input, vid fel och rätt gissning stäng av knapp.
 * Om gissning är rätt: uppdatera med bokstaven _ fältet.
 * Om gissning fel: uppdatera SVG:gn och uppdatera räknaren. 
 * Så länge felgissnigar är mer än 0 kommer programmet att köras. 
