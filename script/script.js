@@ -50,7 +50,12 @@ function disableAllButtons() {
     });
 };
 
+let placeHolder = document.getElementById('word-placeholder');
+let wordLength = randomWord.length;
 
+randomWord.forEach(index => {
+    placeHolder.innerHTML = "_";
+} )
 
 
 
