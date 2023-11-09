@@ -38,24 +38,31 @@ function updatePlaceholder() {
 updatePlaceholder();
 
 function updateHangman() {
+  document.getElementById('greeting').style.display='none';
   switch (wrongGuessingCounter) {
     case 5:
       document.getElementById("ground").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts; &hearts; &hearts;"
       break;
     case 4:
       document.getElementById("scaffold").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts; &hearts;"
       break;
     case 3:
       document.getElementById("head").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts;"
       break;
     case 2:
       document.getElementById("body").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; &hearts;"
       break;
     case 1:
       document.getElementById("arms").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts;"
       break;
     case 0:
       document.getElementById("legs").style.display = "block";
+      document.getElementById("hearts").innerHTML=" "
       break;
   }
 }
@@ -78,7 +85,6 @@ function handlGuess(guess) {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
-    document.getElementById("guess-left").innerText = wrongGuessingCounter;
     updateHangman();
     console.log(wrongGuessingCounter);
 

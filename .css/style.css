@@ -88,7 +88,11 @@ body {
 #head {
     fill: brown;
 }
-
+#hearts{
+    color: rgb(164, 7, 7);
+    font-size: 3.5vh;
+  
+  }
 button:disabled {
     
 }
