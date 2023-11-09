@@ -38,7 +38,6 @@ function updatePlaceholder() {
 updatePlaceholder();
 
 function updateHangman() {
-  document.getElementById('greeting').style.display='none';
   switch (wrongGuessingCounter) {
     case 5:
       document.getElementById("ground").style.display = "block";
@@ -72,6 +71,7 @@ function isWordGuessed() {
 }
 
 function handlGuess(guess) {
+  document.getElementById('greeting').style.display='none';
   if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
     console.log(`${guess}`);
     correctLetter.push(guess);
