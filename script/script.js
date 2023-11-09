@@ -5,6 +5,9 @@ let correctLetter = [];
 let wrongGuessingCounter = 6;
 let randomWord = "";
 let placeHolder = document.getElementById("word-placeholder");
+let buttons = document.querySelectorAll(".keyboard__button");
+let gameOver = false;
+
 let setRandomWord = function (listOfWords) {
   randomWord = listOfWords[Math.floor(Math.random() * listOfWords.length)];
   randomWord = randomWord.toUpperCase();
@@ -12,16 +15,6 @@ let setRandomWord = function (listOfWords) {
 };
 setRandomWord(wordList);
 
-let buttons = document.querySelectorAll(".keyboard__button");
-let gameOver = false;
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (!gameOver) {
-      handlGuess(button.innerHTML.toUpperCase());
-      button.disabled = true;
-    }
-  });
-});
 console.log(randomWord);
 function updatePlaceholder() {
   let placeholderText = "";
@@ -34,35 +27,27 @@ function updatePlaceholder() {
   }
   placeHolder.innerHTML = placeholderText;
 }
-
 updatePlaceholder();
 
-function updateHangman() {
-  switch (wrongGuessingCounter) {
-    case 5:
-      document.getElementById("ground").style.display = "block";
-      break;
-    case 4:
-      document.getElementById("scaffold").style.display = "block";
-      break;
-    case 3:
-      document.getElementById("head").style.display = "block";
-      break;
-    case 2:
-      document.getElementById("body").style.display = "block";
-      break;
-    case 1:
-      document.getElementById("arms").style.display = "block";
-      break;
-    case 0:
-      document.getElementById("legs").style.display = "block";
-      break;
-  }
-}
 
-function isWordGuessed() {
-  return randomWord.every((letter) => correctLetter.includes(letter));  // !!! to check if all letters in the randomWord are in the correctLetter array
+// Lägga båda eventlisteners i en function? 
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!gameOver) {
+      handlGuess(button.innerHTML.toUpperCase());
+      button.disabled = true;
+    }
+  });
+});
+
+
+document.addEventListener("keydown", (event) => {
+  if (!gameOver) {
+    handlGuess(event.key.toUpperCase());
+
 }
+});
+
 
 function handlGuess(guess) {
   if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
@@ -89,14 +74,29 @@ function handlGuess(guess) {
     }
   }
 }
-
-console.log(correctLetter);
-
-document.addEventListener("keydown", (event) => {
-  if (!gameOver) {
-    handlGuess(event.key.toUpperCase());
+function updateHangman() {
+  switch (wrongGuessingCounter) {
+    case 5:
+      document.getElementById("ground").style.display = "block";
+      break;
+    case 4:
+      document.getElementById("scaffold").style.display = "block";
+      break;
+    case 3:
+      document.getElementById("head").style.display = "block";
+      break;
+    case 2:
+      document.getElementById("body").style.display = "block";
+      break;
+    case 1:
+      document.getElementById("arms").style.display = "block";
+      break;
+    case 0:
+      document.getElementById("legs").style.display = "block";
+      break;
+    }
   }
-});
+
 
 function handleKeyDown(event) {
   const pressedKey = event.key.toUpperCase();
@@ -119,3 +119,9 @@ function disableAllButtons() {
 }
 
 // Win or loose, greeting take this sh out
+
+/*-fortfarande problem med att det virituella inte uppdateras per tangentbrodstryckning.
+ -kan fortsätta trycka trots rätt svar. spelet ska avslutas och det ska inte gå att fortsätta gissa. lägga till ett till statement i placeholder(if i=randomword.length) {stanna spelet}
+
+-byta text på guessings left= hur nice hade det inte varit om räknaren istället viasade hjärtan som räknade ner?
+*/
