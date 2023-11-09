@@ -60,11 +60,20 @@ function updateHangman() {
   }
 }
 
+function isWordGuessed() {
+  return randomWord.every((letter) => correctLetter.includes(letter));  // !!! to check if all letters in the randomWord are in the correctLetter array
+}
+
 function handlGuess(guess) {
   if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
     console.log(`${guess}`);
     correctLetter.push(guess);
     updatePlaceholder();
+    if (isWordGuessed()) {
+      console.log("Congratulations! You guessed the word!");
+      gameOver = true;
+      disableAllButtons();
+    }
   } else if (!randomWord.includes(guess) && !wrongLetter.includes(guess)) {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
