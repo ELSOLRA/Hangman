@@ -49,6 +49,7 @@ body {
 #hearts{
     color: rgb(164, 7, 7);
    font-size: 6.5vh;
+
 }
 .secret-word__placeholder{
     letter-spacing: 1vw;
@@ -93,7 +94,7 @@ body {
 }
 
 button:disabled {
-    
+   
 }
 
 @media (max-width: 400px) {
