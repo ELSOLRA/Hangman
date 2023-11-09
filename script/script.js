@@ -7,6 +7,12 @@ let gameOver = false;
 let wrongLetter = [];
 let correctLetter = [];
 let wrongGuessingCounter = 6;
+let audioWrongAnswer = new Audio ('./sounds/wronganswer1.mp3');
+let audioVictory = new Audio ('./sounds/victory1.mp3');
+let audioGameOver = new Audio ('./sounds/gameover1.mp3');
+function playWrongAnswer (audio) {
+  audio.play();
+} 
 let randomWord = "";
 let restartButton = document.getElementById("restart");
 restartButton.addEventListener("click", () => {
@@ -81,6 +87,7 @@ function updateHangman() {
       )}`;
       restartButton.style.display = "block";
       greeting.style.display = "block";
+      playWrongAnswer (audioGameOver);
       break;
   }
 }
@@ -101,6 +108,8 @@ function handlGuess(guess) {
       restartButton.style.display = "block";
       gameOver = true;
       disableAllButtons();
+      playWrongAnswer (audioVictory);
+      
     }
   } else if (!randomWord.includes(guess) && !wrongLetter.includes(guess)) {
     console.log(`${guess} - incorrect`);
@@ -108,6 +117,8 @@ function handlGuess(guess) {
     wrongGuessingCounter--;
     updateHangman();
     console.log(wrongGuessingCounter);
+    playWrongAnswer (audioWrongAnswer);
+    
 
     if (wrongGuessingCounter === 0) {
       console.log("Game over - Six wrong guesses reached.");

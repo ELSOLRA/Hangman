@@ -31,10 +31,11 @@ body {
 .game__header {
     text-align: center;
     margin:0 auto;
-}
+} 
 
 .hangman-box{
     max-height: 40%;
+    
 }
 .hangman-figure {
     
