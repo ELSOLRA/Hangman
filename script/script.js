@@ -103,7 +103,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 let hideGreeting = () => {
-  document.getElementById("greeting").style.display = "none"; //rad 100 tar bort h2
+  document.getElementById("greeting").style.display = "none";
 };
 
 function disableAllButtons() {
