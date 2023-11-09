@@ -1,5 +1,9 @@
 import { wordList } from "./wordsList.js";
 
+
+
+let buttons = document.querySelectorAll(".keyboard__button");
+let gameOver = false;
 let wrongLetter = [];
 let correctLetter = [];
 let wrongGuessingCounter = 6;
@@ -16,10 +20,11 @@ let setRandomWord = function (listOfWords) {
   randomWord = randomWord.toUpperCase();
   randomWord = randomWord.split("");
 };
+
+
+
 setRandomWord(wordList);
 
-let buttons = document.querySelectorAll(".keyboard__button");
-let gameOver = false;
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     if (!gameOver) {
