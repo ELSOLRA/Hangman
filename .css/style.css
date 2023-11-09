@@ -87,7 +87,10 @@ body {
    
 }
 #head {
-    fill: brown;
+    fill: rgb(93, 0, 255);
+}
+#scaffold {
+    fill: #6c1313;
 }
 #hearts{
     color: rgb(164, 7, 7);
