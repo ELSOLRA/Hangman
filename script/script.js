@@ -58,7 +58,7 @@ function handlGuess(guess) {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
-    document.getElementById("guess-left").innerText = wrongGuessingCounter;
+    /*document.getElementById("guess-left").innerText = wrongGuessingCounter;*/
     updateHangman();
     console.log(wrongGuessingCounter);
   } else {
@@ -70,21 +70,27 @@ function updateHangman() {
   switch (wrongGuessingCounter) {
     case 5:
       document.getElementById("ground").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts; &hearts; &hearts;"
       break;
     case 4:
       document.getElementById("scaffold").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts; &hearts;"
       break;
     case 3:
       document.getElementById("head").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts;"
       break;
     case 2:
       document.getElementById("body").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; &hearts; "
       break;
     case 1:
       document.getElementById("arms").style.display = "block";
+      document.getElementById("hearts").innerHTML="&hearts; "
       break;
     case 0:
       document.getElementById("legs").style.display = "block";
+      document.getElementById("hearts").innerHTML=" "
       break;
     }
   }
@@ -97,7 +103,6 @@ function disableAllButtons() {
 }
 
 // Win or loose, greeting take this sh out
-
 /*-fortfarande problem med att det virituella inte uppdateras per tangentbrodstryckning.
  -kan fortsätta trycka trots rätt svar. spelet ska avslutas och det ska inte gå att fortsätta gissa. lägga till ett till statement i placeholder(if i=randomword.length) {stanna spelet}
 
