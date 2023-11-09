@@ -15,6 +15,16 @@ let setRandomWord = function (listOfWords) {
 };
 setRandomWord(wordList);
 
+let buttons = document.querySelectorAll(".keyboard__button");
+let gameOver = false;
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!gameOver) {
+      handlGuess(button.innerHTML.toUpperCase());
+      button.disabled = true;
+    }
+  });
+});
 console.log(randomWord);
 function updatePlaceholder() {
   let placeholderText = "";
@@ -29,28 +39,42 @@ function updatePlaceholder() {
 }
 updatePlaceholder();
 
-// Lägga båda eventlisteners i en function?
-buttons.forEach((button) => {
-  button.addEventListener("click", () => {
-    if (!gameOver) {
-      handlGuess(button.innerHTML.toUpperCase());
-      button.disabled = true;
-    }
-  });
-});
+function updateHangman() {
+  switch (wrongGuessingCounter) {
+    case 5:
+      document.getElementById("ground").style.display = "block";
+      break;
+    case 4:
+      document.getElementById("scaffold").style.display = "block";
+      break;
+    case 3:
+      document.getElementById("head").style.display = "block";
+      break;
+    case 2:
+      document.getElementById("body").style.display = "block";
+      break;
+    case 1:
+      document.getElementById("arms").style.display = "block";
+      break;
+    case 0:
+      document.getElementById("legs").style.display = "block";
+      break;
+  }
+}
 
 function handlGuess(guess) {
-  if (randomWord.includes(guess)) {
+  if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
     console.log(`${guess}`);
     correctLetter.push(guess);
     updatePlaceholder();
-  } else {
+  } else if (!randomWord.includes(guess) && !wrongLetter.includes(guess)) {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
     document.getElementById("guess-left").innerText = wrongGuessingCounter;
     updateHangman();
     console.log(wrongGuessingCounter);
+
     if (wrongGuessingCounter === 0) {
       console.log("Game over - Six wrong guesses reached.");
       gameOver = true;
@@ -75,6 +99,20 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+function handleKeyDown(event) {
+  const pressedKey = event.key.toUpperCase();
+  const clickedButton = Array.from(buttons).find(
+    (button) => button.innerHTML.toUpperCase() === pressedKey
+  );
+
+  if (clickedButton && !clickedButton.disabled && !gameOver) {
+    handlGuess(pressedKey);
+    clickedButton.disabled = true;
+  }
+}
+
+document.addEventListener("keydown", handleKeyDown);
+
 function disableAllButtons() {
   buttons.forEach((button) => {
     button.disabled = true;
@@ -82,9 +120,3 @@ function disableAllButtons() {
 }
 
 // Win or loose, greeting take this sh out
-
-/*-fortfarande problem med att det virituella inte uppdateras per tangentbrodstryckning.
- -kan fortsätta trycka trots rätt svar. spelet ska avslutas och det ska inte gå att fortsätta gissa. lägga till ett till statement i placeholder(if i=randomword.length) {stanna spelet}
-
--byta text på guessings left= hur nice hade det inte varit om räknaren istället viasade hjärtan som räknade ner?
-*/
