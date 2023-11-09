@@ -29,8 +29,7 @@ function updatePlaceholder() {
 }
 updatePlaceholder();
 
-
-// Lägga båda eventlisteners i en function? 
+// Lägga båda eventlisteners i en function?
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     if (!gameOver) {
@@ -39,27 +38,6 @@ buttons.forEach((button) => {
     }
   });
 });
-
-let handleKeyDown = (event) => {
-  let pressedKey = event.key.toUpperCase();
-  let clickedButton = Array.from(buttons).find(
-    (button) => button.innerHTML.toUpperCase() === pressedKey
-  );
-
-  if (clickedButton && !clickedButton.disabled && !gameOver) {
-    handlGuess(pressedKey);
-    clickedButton.disabled = true;
-  }
-};
-
-
-document.addEventListener("keydown", (event) => {
-  if (!gameOver) {
-    handlGuess(event.key.toUpperCase());
-
-}
-});
-
 
 function handlGuess(guess) {
   if (randomWord.includes(guess)) {
@@ -81,14 +59,21 @@ function handlGuess(guess) {
   }
 }
 
-
 console.log(correctLetter);
 
 document.addEventListener("keydown", (event) => {
   if (!gameOver) {
     handlGuess(event.key.toUpperCase());
-  }
+    const pressedKey = event.key.toUpperCase();
+    const clickedButton = Array.from(buttons).find(
+      (button) => button.innerHTML.toUpperCase() === pressedKey
+    );
 
+    if (clickedButton && !clickedButton.disabled && !gameOver) {
+      clickedButton.disabled = true;
+    }
+  }
+});
 
 function disableAllButtons() {
   buttons.forEach((button) => {
