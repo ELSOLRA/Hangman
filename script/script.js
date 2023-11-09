@@ -15,8 +15,6 @@ let setRandomWord = function (listOfWords) {
 };
 setRandomWord(wordList);
 
-let buttons = document.querySelectorAll(".keyboard__button");
-let gameOver = false;
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     if (!gameOver) {
@@ -83,35 +81,30 @@ function handlGuess(guess) {
   }
 }
 
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (!gameOver) {
+      handlGuess(button.innerHTML.toUpperCase());
+      button.disabled = true;
+      hideGreeting();
+    }
+  });
+});
+
 console.log(correctLetter);
 
 document.addEventListener("keydown", (event) => {
+  //funktionen kommer fungera med "musklick" och "tagebordsklick" den reagerar på virutella tagentbordet
   if (!gameOver) {
-    handlGuess(event.key.toUpperCase());
-    const pressedKey = event.key.toUpperCase();
-    const clickedButton = Array.from(buttons).find(
-      (button) => button.innerHTML.toUpperCase() === pressedKey
-    );
-
-    if (clickedButton && !clickedButton.disabled && !gameOver) {
-      clickedButton.disabled = true;
-    }
+    let pressedKey = event.key.toUpperCase(); //Variabeln får värdet på den tangent som spelaren tryckte på. Event key tar värdet på bokstaven i tagentet. toUpperCase(); method för att omvandla all input för bulletproof
+    handlGuess(pressedKey); //anropar
+    hideGreeting(); //anrop
   }
 });
 
-function handleKeyDown(event) {
-  const pressedKey = event.key.toUpperCase();
-  const clickedButton = Array.from(buttons).find(
-    (button) => button.innerHTML.toUpperCase() === pressedKey
-  );
-
-  if (clickedButton && !clickedButton.disabled && !gameOver) {
-    handlGuess(pressedKey);
-    clickedButton.disabled = true;
-  }
-}
-
-document.addEventListener("keydown", handleKeyDown);
+let hideGreeting = () => {
+  document.getElementById("greeting").style.display = "none"; //rad 100 tar bort h2
+};
 
 function disableAllButtons() {
   buttons.forEach((button) => {
