@@ -40,6 +40,18 @@ buttons.forEach((button) => {
   });
 });
 
+let handleKeyDown = (event) => {
+  let pressedKey = event.key.toUpperCase();
+  let clickedButton = Array.from(buttons).find(
+    (button) => button.innerHTML.toUpperCase() === pressedKey
+  );
+
+  if (clickedButton && !clickedButton.disabled && !gameOver) {
+    handlGuess(pressedKey);
+    clickedButton.disabled = true;
+  }
+};
+
 
 document.addEventListener("keydown", (event) => {
   if (!gameOver) {
@@ -50,43 +62,31 @@ document.addEventListener("keydown", (event) => {
 
 
 function handlGuess(guess) {
-  if (randomWord.includes(guess) && wrongGuessingCounter > 0) {
+  if (randomWord.includes(guess)) {
     console.log(`${guess}`);
     correctLetter.push(guess);
     updatePlaceholder();
-  } else if (!randomWord.includes(guess) && wrongGuessingCounter > 0) {
+  } else {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
     document.getElementById("guess-left").innerText = wrongGuessingCounter;
     updateHangman();
     console.log(wrongGuessingCounter);
-  } else {
-    gameOver = true;
-    disableAllButtons();
+    if (wrongGuessingCounter === 0) {
+      console.log("Game over - Six wrong guesses reached.");
+      gameOver = true;
+      disableAllButtons();
+    }
   }
 }
-function updateHangman() {
-  switch (wrongGuessingCounter) {
-    case 5:
-      document.getElementById("ground").style.display = "block";
-      break;
-    case 4:
-      document.getElementById("scaffold").style.display = "block";
-      break;
-    case 3:
-      document.getElementById("head").style.display = "block";
-      break;
-    case 2:
-      document.getElementById("body").style.display = "block";
-      break;
-    case 1:
-      document.getElementById("arms").style.display = "block";
-      break;
-    case 0:
-      document.getElementById("legs").style.display = "block";
-      break;
-    }
+
+
+console.log(correctLetter);
+
+document.addEventListener("keydown", (event) => {
+  if (!gameOver) {
+    handlGuess(event.key.toUpperCase());
   }
 
 
