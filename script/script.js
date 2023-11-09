@@ -50,6 +50,7 @@ document.addEventListener("keydown", (event) => {
 
 
 function handlGuess(guess) {
+  document.getElementById("greeting").style.display = "none";
   if (randomWord.includes(guess) && wrongGuessingCounter > 0) {
     console.log(`${guess}`);
     correctLetter.push(guess);
@@ -106,5 +107,4 @@ function disableAllButtons() {
 /*-fortfarande problem med att det virituella inte uppdateras per tangentbrodstryckning.
  -kan fortsätta trycka trots rätt svar. spelet ska avslutas och det ska inte gå att fortsätta gissa. lägga till ett till statement i placeholder(if i=randomword.length) {stanna spelet}
 
--byta text på guessings left= hur nice hade det inte varit om räknaren istället viasade hjärtan som räknade ner?
 */
