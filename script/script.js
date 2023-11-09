@@ -4,6 +4,12 @@ let wrongLetter = [];
 let correctLetter = [];
 let wrongGuessingCounter = 6;
 let randomWord = "";
+let restartButton = document.getElementById("restart");
+restartButton.addEventListener("click", () => {
+  window.location.reload();
+});
+let greeting = document.getElementById("greeting");
+greeting.innerHTML = "Welcome, to start the game - guess on a letter";
 let placeHolder = document.getElementById("word-placeholder");
 let setRandomWord = function (listOfWords) {
   randomWord = listOfWords[Math.floor(Math.random() * listOfWords.length)];
@@ -41,43 +47,53 @@ function updateHangman() {
   switch (wrongGuessingCounter) {
     case 5:
       document.getElementById("ground").style.display = "block";
-      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts; &hearts; &hearts;"
+      document.getElementById("hearts").innerHTML =
+        "&hearts; &hearts; &hearts; &hearts; &hearts;";
       break;
     case 4:
       document.getElementById("scaffold").style.display = "block";
-      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts; &hearts;"
+      document.getElementById("hearts").innerHTML =
+        "&hearts; &hearts; &hearts; &hearts;";
       break;
     case 3:
       document.getElementById("head").style.display = "block";
-      document.getElementById("hearts").innerHTML="&hearts; &hearts; &hearts;"
+      document.getElementById("hearts").innerHTML =
+        "&hearts; &hearts; &hearts;";
       break;
     case 2:
       document.getElementById("body").style.display = "block";
-      document.getElementById("hearts").innerHTML="&hearts; &hearts;"
+      document.getElementById("hearts").innerHTML = "&hearts; &hearts;";
       break;
     case 1:
       document.getElementById("arms").style.display = "block";
-      document.getElementById("hearts").innerHTML="&hearts;"
+      document.getElementById("hearts").innerHTML = "&hearts;";
       break;
     case 0:
       document.getElementById("legs").style.display = "block";
-      document.getElementById("hearts").innerHTML=" "
+      document.getElementById("hearts").innerHTML = " ";
+      greeting.innerHTML = `You lost, the right word was: ${randomWord.join(
+        ""
+      )}`;
+      restartButton.style.display = "block";
+      greeting.style.display = "block";
       break;
   }
 }
 
 function isWordGuessed() {
-  return randomWord.every((letter) => correctLetter.includes(letter));  // !!! to check if all letters in the randomWord are in the correctLetter array
+  return randomWord.every((letter) => correctLetter.includes(letter)); // !!! to check if all letters in the randomWord are in the correctLetter array
 }
 
 function handlGuess(guess) {
-  document.getElementById('greeting').style.display='none';
+  greeting.style.display = "none";
   if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
     console.log(`${guess}`);
     correctLetter.push(guess);
     updatePlaceholder();
     if (isWordGuessed()) {
-      console.log("Congratulations! You guessed the word!");
+      greeting.innerHTML='You found the word!';
+      greeting.style.display='block';
+      restartButton.style.display = "block";
       gameOver = true;
       disableAllButtons();
     }
