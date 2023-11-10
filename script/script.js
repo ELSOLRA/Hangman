@@ -85,12 +85,6 @@ function updateHangman() {
     case 0:
       document.getElementById("legs").style.display = "block";
       document.getElementById("hearts").innerHTML = " ";
-      greeting.innerHTML = `You lost, the right word was: ${randomWord.join(
-        ""
-      )}`;
-      restartButton.style.display = "block";
-      greeting.style.display = "block";
-      playAudioWithDelay(audioGameOver, 400);
       break;
   }
 }
@@ -139,9 +133,7 @@ function handlGuess(guess) {
     playAudio(audioWrongAnswer);
 
     if (wrongGuessingCounter === 0) {
-      console.log("Game over - Six wrong guesses reached.");
-      gameOver = true;
-      disableAllButtons();
+      gameIsOver();
     }
   }
 }
@@ -175,3 +167,15 @@ function disableAllButtons() {
 }
 
 // Win or loose, greeting take this sh out
+function gameIsOver () {
+  console.log("Game over - Six wrong guesses reached.");
+  gameOver = true;
+  disableAllButtons();
+  greeting.innerHTML = `You lost, the right word was: ${randomWord.join(
+    ""
+  )}`;
+  restartButton.style.display = "block";
+  greeting.style.display = "block";
+  playAudioWithDelay(audioGameOver, 400);
+
+}
