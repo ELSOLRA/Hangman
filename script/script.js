@@ -1,6 +1,8 @@
 import { wordList } from "./wordsList.js";
 
+let randomWord = "";
 let buttons = document.querySelectorAll(".keyboard__button");
+let restartButton = document.getElementById("restart");
 let gameOver = false;
 let wrongLetter = [];
 let correctLetter = [];
@@ -18,8 +20,7 @@ function playAudioWithDelay(audio, delay) {
     audio.play();
   }, delay);
 }
-let randomWord = "";
-let restartButton = document.getElementById("restart");
+
 restartButton.addEventListener("click", () => {
   window.location.reload();
 });
@@ -32,12 +33,11 @@ let setRandomWord = function (listOfWords) {
 };
 setRandomWord(wordList);
 
-function showGreetingArea(str){
-  greeting.style.display='block';
-    greeting.innerHTML=str;
-};
+function showGreetingArea(str) {
+  greeting.style.display = "block";
+  greeting.innerHTML = str;
+}
 showGreetingArea("Welcome, guess a letter to start the game ");
-
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -112,7 +112,6 @@ function handleGuess(guess) {
     if (clickedButton) {
       clickedButton.classList.add("correct-letter"); //samma sak som class ="" i htlm
       clickedButton.disabled = true;
- 
     }
     playAudio(audioCorrect);
 
@@ -121,7 +120,7 @@ function handleGuess(guess) {
     }, 300);
 
     if (isWordGuessed()) {
-       showGreetingArea("You found the word!");
+      showGreetingArea("You found the word!");
       restartButton.style.display = "block";
       gameOver = true;
       disableAllButtons();
@@ -150,8 +149,8 @@ document.addEventListener("keydown", (event) => {
 });
 
 function handleKeyDown(event) {
-  const pressedKey = event.key.toUpperCase();
-  const clickedButton = Array.from(buttons).find(
+  let pressedKey = event.key.toUpperCase();
+  let clickedButton = Array.from(buttons).find(
     (button) => button.innerHTML.toUpperCase() === pressedKey
   );
 
@@ -169,14 +168,11 @@ function disableAllButtons() {
   });
 }
 
-function gameIsOver () {
+function gameIsOver() {
   console.log("Game over - Six wrong guesses reached.");
   gameOver = true;
   disableAllButtons();
-  showGreetingArea(`You lost, the right word was: ${randomWord.join(
-    ""
-  )}`);
+  showGreetingArea(`You lost, the right word was: ${randomWord.join("")}`);
   restartButton.style.display = "block";
   playAudioWithDelay(audioGameOver, 400);
-
 }
