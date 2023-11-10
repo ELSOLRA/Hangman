@@ -1,6 +1,8 @@
 import { wordList } from "./wordsList.js";
 
+let randomWord = "";
 let buttons = document.querySelectorAll(".keyboard__button");
+let restartButton = document.getElementById("restart");
 let gameOver = false;
 let wrongLetter = [];
 let correctLetter = [];
@@ -18,26 +20,29 @@ function playAudioWithDelay(audio, delay) {
     audio.play();
   }, delay);
 }
-let randomWord = "";
-let restartButton = document.getElementById("restart");
+
 restartButton.addEventListener("click", () => {
   window.location.reload();
 });
 let greeting = document.getElementById("greeting");
-greeting.innerHTML = "Welcome, to start the game - guess on a letter";
 let placeHolder = document.getElementById("word-placeholder");
 let setRandomWord = function (listOfWords) {
   randomWord = listOfWords[Math.floor(Math.random() * listOfWords.length)];
   randomWord = randomWord.toUpperCase();
   randomWord = randomWord.split("");
 };
-
 setRandomWord(wordList);
+
+function showGreetingArea(str) {
+  greeting.style.display = "block";
+  greeting.innerHTML = str;
+}
+showGreetingArea("Welcome, guess a letter to start the game ");
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
     if (!gameOver) {
-      handlGuess(button.innerHTML.toUpperCase());
+      handleGuess(button.innerHTML.toUpperCase());
       button.disabled = true;
     }
   });
@@ -57,7 +62,7 @@ function updatePlaceholder() {
 
 updatePlaceholder();
 
-function updateHangman() {
+function updateFeatures() {
   switch (wrongGuessingCounter) {
     case 5:
       document.getElementById("ground").style.display = "block";
@@ -85,12 +90,6 @@ function updateHangman() {
     case 0:
       document.getElementById("legs").style.display = "block";
       document.getElementById("hearts").innerHTML = " ";
-      greeting.innerHTML = `You lost, the right word was: ${randomWord.join(
-        ""
-      )}`;
-      restartButton.style.display = "block";
-      greeting.style.display = "block";
-      playAudioWithDelay(audioGameOver, 400);
       break;
   }
 }
@@ -99,7 +98,7 @@ function isWordGuessed() {
   return randomWord.every((letter) => correctLetter.includes(letter)); // !!! to check if all letters in the randomWord are in the correctLetter array
 }
 
-function handlGuess(guess) {
+function handleGuess(guess) {
   greeting.style.display = "none";
 
   if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
@@ -115,7 +114,6 @@ function handlGuess(guess) {
       clickedButton.classList.add("correct-letter"); //samma sak som class ="" i htlm
       clickedButton.disabled = true;
     }
-
     playAudio(audioCorrect);
 
     setTimeout(() => {
@@ -123,8 +121,7 @@ function handlGuess(guess) {
     }, 300);
 
     if (isWordGuessed()) {
-      greeting.innerHTML = "You found the word!";
-      greeting.style.display = "block";
+      showGreetingArea("You found the word!");
       restartButton.style.display = "block";
       gameOver = true;
       disableAllButtons();
@@ -134,14 +131,12 @@ function handlGuess(guess) {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
-    updateHangman();
+    updateFeatures();
     console.log(wrongGuessingCounter);
     playAudio(audioWrongAnswer);
 
     if (wrongGuessingCounter === 0) {
-      console.log("Game over - Six wrong guesses reached.");
-      gameOver = true;
-      disableAllButtons();
+      gameIsOver();
     }
   }
 }
@@ -150,18 +145,18 @@ console.log(correctLetter);
 
 document.addEventListener("keydown", (event) => {
   if (!gameOver) {
-    handlGuess(event.key.toUpperCase());
+    handleGuess(event.key.toUpperCase());
   }
 });
 
 function handleKeyDown(event) {
-  const pressedKey = event.key.toUpperCase();
-  const clickedButton = Array.from(buttons).find(
+  let pressedKey = event.key.toUpperCase();
+  let clickedButton = Array.from(buttons).find(
     (button) => button.innerHTML.toUpperCase() === pressedKey
   );
 
   if (clickedButton && !clickedButton.disabled && !gameOver) {
-    handlGuess(pressedKey);
+    handleGuess(pressedKey);
     clickedButton.disabled = true;
   }
 }
@@ -174,4 +169,11 @@ function disableAllButtons() {
   });
 }
 
-// Win or loose, greeting take this sh out
+function gameIsOver() {
+  console.log("Game over - Six wrong guesses reached.");
+  gameOver = true;
+  disableAllButtons();
+  showGreetingArea(`You lost, the right word was: ${randomWord.join("")}`);
+  restartButton.style.display = "block";
+  playAudioWithDelay(audioGameOver, 400);
+}
