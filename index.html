@@ -15,9 +15,11 @@
       <header class="game__header">
         <h1 class="game__title">Hangman Game</h1>
       </header>
+      <h2 id="greeting"></h2> 
+      <button id="restart" class="pulse-button" hidden>Restart game</button>
     
       <section class="hangman-box">
-        <h2 id="greeting"> Welcome, to start the game - guess on a letter</h2>
+        
         <svg
           class="hangman-figure"
           width="501"
@@ -62,9 +64,8 @@
         </svg>
       </section>
       <section id="guess-info" class="guess-info">
-        <p>
-          Guesses left: <span id="guess-left" class="guess-info__count">6</span>
-        </p>
+        <p id="hearts" class="guess-info__hearts">
+          &hearts; &hearts; &hearts; &hearts; &hearts; &hearts;</p> 
       </section>
       <section id="secret-word" class="secret-word">
         <p>
