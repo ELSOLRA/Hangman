@@ -101,13 +101,27 @@ function isWordGuessed() {
 
 function handlGuess(guess) {
   greeting.style.display = "none";
+
   if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
     console.log(`${guess}`);
+
     correctLetter.push(guess);
+
+    // Add the 'correct-letter' class to the button
+    let clickedButton = Array.from(buttons).find(
+      (button) => button.innerHTML.toUpperCase() === guess
+    );
+    if (clickedButton) {
+      clickedButton.classList.add("correct-letter"); //samma sak som class ="" i htlm
+      clickedButton.disabled = true;
+    }
+
     playAudio(audioCorrect);
+
     setTimeout(() => {
       updatePlaceholder();
     }, 300);
+
     if (isWordGuessed()) {
       greeting.innerHTML = "You found the word!";
       greeting.style.display = "block";
@@ -123,6 +137,7 @@ function handlGuess(guess) {
     updateHangman();
     console.log(wrongGuessingCounter);
     playAudio(audioWrongAnswer);
+
     if (wrongGuessingCounter === 0) {
       console.log("Game over - Six wrong guesses reached.");
       gameOver = true;
