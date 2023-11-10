@@ -1,20 +1,18 @@
 import { wordList } from "./wordsList.js";
 
-
-
 let buttons = document.querySelectorAll(".keyboard__button");
 let gameOver = false;
 let wrongLetter = [];
 let correctLetter = [];
 let wrongGuessingCounter = 6;
-let audioWrongAnswer = new Audio ('./sounds/wronganswer7.mp3');
-let audioVictory = new Audio ('./sounds/victory1.mp3');
-let audioGameOver = new Audio ('./sounds/gameover1.mp3');
-let audioCorrect = new Audio ('./sounds/correct3.mp3');
+let audioWrongAnswer = new Audio("./sounds/wronganswer7.mp3");
+let audioVictory = new Audio("./sounds/victory1.mp3");
+let audioGameOver = new Audio("./sounds/gameover1.mp3");
+let audioCorrect = new Audio("./sounds/correct3.mp3");
 
-function playAudio (audio) {
+function playAudio(audio) {
   audio.play();
-} 
+}
 function playAudioWithDelay(audio, delay) {
   setTimeout(() => {
     audio.play();
@@ -33,8 +31,6 @@ let setRandomWord = function (listOfWords) {
   randomWord = randomWord.toUpperCase();
   randomWord = randomWord.split("");
 };
-
-
 
 setRandomWord(wordList);
 
@@ -94,7 +90,7 @@ function updateHangman() {
       )}`;
       restartButton.style.display = "block";
       greeting.style.display = "block";
-      playAudioWithDelay (audioGameOver, 400);
+      playAudioWithDelay(audioGameOver, 400);
       break;
   }
 }
@@ -105,29 +101,43 @@ function isWordGuessed() {
 
 function handlGuess(guess) {
   greeting.style.display = "none";
+
   if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
     console.log(`${guess}`);
+
     correctLetter.push(guess);
-    playAudio(audioCorrect);  
+
+    // Add the 'correct-letter' class to the button
+    let clickedButton = Array.from(buttons).find(
+      (button) => button.innerHTML.toUpperCase() === guess
+    );
+    if (clickedButton) {
+      clickedButton.classList.add("correct-letter"); //samma sak som class ="" i htlm
+      clickedButton.disabled = true;
+    }
+
+    playAudio(audioCorrect);
+
     setTimeout(() => {
-    updatePlaceholder();
-  }, 300)
+      updatePlaceholder();
+    }, 300);
+
     if (isWordGuessed()) {
-      greeting.innerHTML='You found the word!';
-      greeting.style.display='block';
+      greeting.innerHTML = "You found the word!";
+      greeting.style.display = "block";
       restartButton.style.display = "block";
       gameOver = true;
       disableAllButtons();
-      playAudioWithDelay (audioVictory, 400);
+      playAudioWithDelay(audioVictory, 400);
     }
-   
   } else if (!randomWord.includes(guess) && !wrongLetter.includes(guess)) {
     console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
     updateHangman();
     console.log(wrongGuessingCounter);
-    playAudio (audioWrongAnswer);
+    playAudio(audioWrongAnswer);
+
     if (wrongGuessingCounter === 0) {
       console.log("Game over - Six wrong guesses reached.");
       gameOver = true;
