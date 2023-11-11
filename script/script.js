@@ -1,5 +1,6 @@
 import { wordList } from "./wordsList.js";
 
+const maxHeightPercentage = "35%";
 let randomWord = "";
 let buttons = document.querySelectorAll(".keyboard__button");
 let restartButton = document.getElementById("restart");
@@ -7,29 +8,25 @@ let gameOver = false;
 let wrongLetter = [];
 let correctLetter = [];
 let wrongGuessingCounter = 6;
+
 let audioWrongAnswer = new Audio("./sounds/wronganswer7.mp3");
 let audioVictory = new Audio("./sounds/victory1.mp3");
 let audioGameOver = new Audio("./sounds/gameover1.mp3");
 let audioCorrect = new Audio("./sounds/correct3.mp3");
 
-function playAudio(audio) {
-  audio.play();
+function playAudio(audio, delay = 0) {
+  setTimeout(() => audio.play(), delay);
 }
-function playAudioWithDelay(audio, delay) {
-  setTimeout(() => {
-    audio.play();
-  }, delay);
-}
-
 restartButton.addEventListener("click", () => {
   window.location.reload();
 });
+
 let greeting = document.getElementById("greeting");
 let placeHolder = document.getElementById("word-placeholder");
-let setRandomWord = function (listOfWords) {
-  randomWord = listOfWords[Math.floor(Math.random() * listOfWords.length)];
-  randomWord = randomWord.toUpperCase();
-  randomWord = randomWord.split("");
+let hangmanBox = document.querySelector ('.hangman-box');
+
+function setRandomWord (listOfWords) {
+  randomWord = listOfWords[Math.floor(Math.random() * listOfWords.length)].toUpperCase().split("");
 };
 setRandomWord(wordList);
 
@@ -37,6 +34,7 @@ function showGreetingArea(str) {
   greeting.style.display = "block";
   greeting.innerHTML = str;
 }
+
 showGreetingArea("Welcome, guess a letter to start the game ");
 
 buttons.forEach((button) => {
@@ -48,7 +46,8 @@ buttons.forEach((button) => {
   });
 });
 console.log(randomWord);
-function updatePlaceholder() {
+
+/* function updatePlaceholder() {
   let placeholderText = "";
   for (let i = 0; i < randomWord.length; i++) {
     if (correctLetter.includes(randomWord[i])) {
@@ -58,6 +57,9 @@ function updatePlaceholder() {
     }
   }
   placeHolder.innerHTML = placeholderText;
+} */
+function updatePlaceholder() {
+  placeHolder.innerHTML = randomWord.map(letter => correctLetter.includes(letter) ? letter : "_").join("");
 }
 
 updatePlaceholder();
@@ -101,7 +103,7 @@ function isWordGuessed() {
 function handleGuess(guess) {
   greeting.style.display = "none";
   if (randomWord.includes(guess) && !correctLetter.includes(guess)) {
-    console.log(`${guess}`);
+    // console.log(`${guess}`);
 
     correctLetter.push(guess);
 
@@ -122,16 +124,17 @@ function handleGuess(guess) {
     if (isWordGuessed()) {
       showGreetingArea("You found the word!");
       restartButton.style.display = "block";
+      hangmanBox.style.maxHeight = maxHeightPercentage;    // att dold hangman ska inte trycka utanför 100vh
       gameOver = true;
       disableAllButtons();
-      playAudioWithDelay(audioVictory, 400);
+      playAudio(audioVictory, 400);
     }
   } else if (!randomWord.includes(guess) && !wrongLetter.includes(guess)) {
-    console.log(`${guess} - incorrect`);
+    // console.log(`${guess} - incorrect`);
     wrongLetter.push(guess);
     wrongGuessingCounter--;
     updateFeatures();
-    console.log(wrongGuessingCounter);
+    // console.log(wrongGuessingCounter);
     playAudio(audioWrongAnswer);
 
     if (wrongGuessingCounter === 0) {
@@ -174,5 +177,8 @@ function gameIsOver() {
   disableAllButtons();
   showGreetingArea(`You lost, the right word was: ${randomWord.join("")}`);
   restartButton.style.display = "block";
-  playAudioWithDelay(audioGameOver, 400);
+  playAudio(audioGameOver, 400);
 }
+
+
+//  Vid vinst sticker tangentbord ut (scrollbar);

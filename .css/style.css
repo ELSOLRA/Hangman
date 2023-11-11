@@ -8,14 +8,18 @@ body {
   max-height: 100vh;
   width: 100%;
   background-color: lightgray;
+  background-image: url('/Assets/img/background/paper-5746244_1920.jpg');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  
 }
 .game__title {
   text-shadow: #ff000085 1px 1px 10px;
-  /* background: linear-gradient(to left, #FF0000, #000000);
+ /*   background: linear-gradient(to left, #FF0000, #000000);
     -webkit-background-clip: text;
     -moz-background-clip: text;
-    -moz-background-clip: text;
-    color: transparent; */
+    color: transparent;  */
 }
 
 .game {
@@ -26,6 +30,7 @@ body {
   font-size: 1.5rem;
   gap: 3%;
   margin: auto;
+
 }
 .game__header {
   text-align: center;
