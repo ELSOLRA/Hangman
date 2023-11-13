@@ -8,11 +8,10 @@ body {
   max-height: 100vh;
   width: 100%;
   background-color: lightgray;
-  background-image: url('/Assets/img/background/paper-5746244_1920.jpg');
+  background-image: url("../Assets/img/background/paper-5746244_1920.jpg");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center center;
-  
 }
 .game__title {
   text-shadow: #ff000085 1px 1px 10px;

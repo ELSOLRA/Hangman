@@ -1,6 +1,6 @@
 import { wordList } from "./wordsList.js";
 
-const maxHeightPercentage = "30%";
+
 let randomWord = "";
 let buttons = document.querySelectorAll(".keyboard__button");
 let restartButton = document.getElementById("restart");
@@ -8,10 +8,11 @@ let gameOver = false;
 let wrongLetter = [];
 let correctLetter = [];
 let wrongGuessingCounter = 6;
-let audioWrongAnswer = new Audio("./sounds/wronganswer7.mp3");
-let audioVictory = new Audio("./sounds/victory1.mp3");
-let audioGameOver = new Audio("./sounds/gameover1.mp3");
-let audioCorrect = new Audio("./sounds/correct3.mp3");
+const maxHeightPercentage = "30%";
+let audioWrongAnswer = new Audio("Assets/sounds/wronganswer7.mp3");
+let audioVictory = new Audio("Assets/sounds/victory1.mp3");
+let audioGameOver = new Audio("Assets/sounds/gameover1.mp3");
+let audioCorrect = new Audio("Assets/sounds/correct3.mp3");
 let greeting = document.getElementById("greeting");
 let placeHolder = document.getElementById("word-placeholder");
 let hangmanBox = document.querySelector ('.hangman-box');
@@ -99,7 +100,7 @@ function handleGuess(guess) {
     if (isWordGuessed()) {
       showGreetingArea("You found the word!");
       restartButton.style.display = "block";
-      hangmanBox.style.maxHeight = maxHeightPercentage;   // att dold hangman ska inte trycka utanför 100vh
+      hangmanBox.style.maxHeight = maxHeightPercentage;  
       gameOver = true;
       disableAllButtons();
       playAudio(audioVictory, 400);
