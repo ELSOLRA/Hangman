@@ -129,7 +129,7 @@ button:disabled {
   }
 }
 
-@media screen and (width < 400px) { 
+@media screen and (max-width: 400px) { 
 
   .hangman-box {
     max-height: 26%;
@@ -141,13 +141,9 @@ button:disabled {
     max-width: 100vw;
   }
 }
-@media screen and (400px <= width < 600px) { 
-  .hangman-box {
-    max-height: 35%;
-  }
-}
 
-@media screen and (600px <= width < 768px) { 
+
+@media screen and ( max-width: 768px) { 
   .hangman-box {
     max-height: 35%;
   }
