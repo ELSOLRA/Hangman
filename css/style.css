@@ -68,7 +68,6 @@ body {
   display: flex;
   justify-content: center;
   min-width: 260px;
-  max-width: 65vw;
   flex-direction: column;
   gap: 0.8vh;
   padding-bottom: 2%;
