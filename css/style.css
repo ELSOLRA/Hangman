@@ -5,13 +5,13 @@
 }
 
 body {
-  max-height: 100vh;
+  height: 100vh;
   width: 100%;
   background-color: lightgray;
   background-image: url("../Assets/img/background/paper-5746244_1920.jpg");
   background-repeat: no-repeat;
-  background-size: 100% 100%;
   background-position: center center;
+  margin: 0;
 }
 .game__title {
   text-shadow: #ff000085 1px 1px 10px;
@@ -71,6 +71,7 @@ body {
   max-width: 65vw;
   flex-direction: column;
   gap: 0.8vh;
+  padding-bottom: 2%;
 }
 
 .keyboard__button {
@@ -89,6 +90,10 @@ body {
   cursor: pointer;
 }
 
+#greeting {
+  text-align: center;
+}
+
 #ground {
   fill: rgb(14 157 14);
   opacity: 0.8;
@@ -103,6 +108,7 @@ body {
   color: rgb(164, 7, 7);
   font-size: 3.5vh;
 }
+
 button:disabled {
   background-color: #00000030;
 }
@@ -124,9 +130,27 @@ button:disabled {
   }
 }
 
-@media (max-width: 400px) {
-  .keyboard {
-    max-width: 100%;
-    padding-bottom: 2%;
+@media screen and (width < 400px) { 
+
+  .hangman-box {
+    max-height: 26%;
+  }
+  #greeting {
+    font-size: 1.5rem;
+  }
+  .keyboard  {
+    max-width: 100vw;
   }
 }
+@media screen and (400px <= width < 600px) { 
+  .hangman-box {
+    max-height: 35%;
+  }
+}
+
+@media screen and (600px <= width < 768px) { 
+  .hangman-box {
+    max-height: 35%;
+  }
+}
+
